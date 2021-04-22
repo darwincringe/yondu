@@ -75428,7 +75428,7 @@ var Login = /*#__PURE__*/function (_React$Component) {
         var status = error.response.status; // if (status === 401) {
 
         _this2.setState({
-          error: 'Username or password not recognised.'
+          error: 'Username or password is not recognised.'
         }); // }
 
       });

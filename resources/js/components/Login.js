@@ -35,7 +35,7 @@ class Login extends React.Component {
 		.catch((error) => {
 			const status = error.response.status;
 			// if (status === 401) {
-				this.setState({ error: 'Username or password not recognised.' });
+				this.setState({ error: 'Username or password is not recognised.' });
 			// }
 		});
 	}
