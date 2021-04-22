@@ -75585,6 +75585,9 @@ var Users = /*#__PURE__*/function (_React$Component) {
     value: function init() {
       var _this2 = this;
 
+      this.setState({
+        users: []
+      });
       axios.post('/api/fetch-users').then(function (response) {
         var data = response.data;
 

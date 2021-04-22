@@ -36,6 +36,11 @@ class Users extends React.Component {
 	}
 
 	init() {
+
+		this.setState({
+			users: [],
+		});
+
 		axios.post('/api/fetch-users')
 		.then((response) => {
 			const data = response.data;
