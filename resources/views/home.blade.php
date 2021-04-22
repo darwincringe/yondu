@@ -1,5 +1,20 @@
 @extends('layouts.app')
-
+{{-- <form>
+    <div className="row">
+        <div className="col-6">
+            <div className="form-group">
+                <label htmlFor="username">Username <b className="text-danger">*</b></label>
+                <input type="text" name="username" id="username" className="form-control" />
+            </div>
+        </div> 
+        <div className="col-6">
+            <div className="form-group">
+                <label htmlFor="email">Email <b className="text-danger">*</b></label>
+                <input type="text" name="email" id="email" className="form-control" />
+            </div>
+        </div> 
+    </div>
+</form> --}}
 {{-- @section('content')
 <div class="container">
     <div class="row justify-content-center">

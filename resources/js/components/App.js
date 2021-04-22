@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from './Home';
-import Clients from './Clients';
+import Users from './Users';
 import Login from './Login';
 import { HashRouter, Route, Switch, NavLink, Redirect } from 'react-router-dom';
 
@@ -14,6 +14,7 @@ class App extends React.Component {
 		};
 		this.logout = this.logout.bind(this);
 		this.authenticate = this.authenticate.bind(this);
+		this.parseErrors = this.parseErrors.bind(this);
     }
 
     componentWillMount() {
@@ -32,7 +33,7 @@ class App extends React.Component {
 			token: token
 		});
 		localStorage.setItem('jwt', token);
-		
+		axios.defaults.headers.common['Authorization'] = token;
 		if(user) {
 			this.setState({
 				user: user
@@ -64,15 +65,34 @@ class App extends React.Component {
 		});
 	}
 
+	parseErrors(errors) {
+		let result = '';
+		for(let error in errors){
+		    errors[error].forEach(val => {
+		        result += ('<li>'+val+'</li>');
+		    })
+		}
+
+		return '<ul>' + result + '</ul>';
+	}
+
     render() {
         return (
             <HashRouter>
 			    <div>
-			        <Menu isAuthenticated={this.state.isAuthenticated} logout={this.logout} />
+			        <Menu isAuthenticated={this.state.isAuthenticated} user={this.state.user} logout={this.logout} />
 			        <Switch>
 			            <Route exact path='/' component={Home} />
 			            <Route exact path='/login' render={(props) => <Login authenticate={this.authenticate} isAuthenticated={this.state.isAuthenticated} {...props} />} />
-			            <PrivateRoute exact path='/clients' component={Clients} isAuthenticated={this.state.isAuthenticated} token={this.state.token} refresh={this.refresh} />
+			            <PrivateRoute 
+			            	exact path='/users' 
+			            	component={Users} 
+			            	user={this.state.user} 
+			            	isAuthenticated={this.state.isAuthenticated} 
+			            	token={this.state.token} 
+			            	refresh={this.refresh} 
+			            	parseErrors={this.parseErrors}
+		            	/>
 			        </Switch>
 			    </div>
 			</HashRouter>
@@ -110,11 +130,15 @@ const Menu = (props) => (
 		               		Home
 		           		</NavLink>
                     </li>
+
+                    {props.isAuthenticated && props.user.role == 'admin' ?
                     <li className="nav-item">
-	                    <NavLink exact className="nav-link" activeClassName="active" to="/clients">
+	                    <NavLink exact className="nav-link" activeClassName="active" to="/users">
 		               		Users
 		           		</NavLink>
                     </li>
+                    : null }
+
                 </ul>
                 {<ul className="navbar-nav ml-auto">
                     <li className="nav-item">
@@ -124,7 +148,7 @@ const Menu = (props) => (
                     {props.isAuthenticated ?
                 	<li className="nav-item dropdown">
                         <a id="navbarDropdown" className="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            My Account <span className="caret"></span>
+                            {props.user.first_name} {props.user.last_name} <span className="caret"></span>
                         </a>
 
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

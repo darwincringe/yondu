@@ -24,6 +24,17 @@ Route::name('api.')->namespace('API')->group(function() {
 
 	Route::group(['middleware' => ['assign.guard:web', 'jwt.auth', 'api.auth:web']], function() {
 		Route::post('/profile', 'HomeController@profile')->name('profile');
+
+		Route::group(['middleware' => ['isAdmin']], function() {
+
+			Route::post('/fetch-users', 'AdminController@fetchUsers')->name('fetch-users');
+			Route::post('/create-users', 'AdminController@create')->name('create-users');
+			Route::post('/update-users', 'AdminController@update')->name('update-users');
+			Route::post('/delete-users', 'AdminController@delete')->name('delete-users');
+			Route::post('/change-password-users', 'AdminController@changePassowrd')->name('change-password-users');
+		
+		});
+
 	});
 
 });

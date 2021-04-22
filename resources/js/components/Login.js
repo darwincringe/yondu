@@ -48,39 +48,51 @@ class Login extends React.Component {
 		}
 		return (
 			<div className="container py-4">
-				<h1>Login</h1>
-				{this.state.error !== '' ?
-					<p className="text-danger">{this.state.error}</p>
-					:
-					null
-				}
-				{this.props.isAuthenticated ?
-					<p className="text-info">You are already logged in.</p>
-					:
-					<form onSubmit={this.handleSubmit}>
-						<div className='form-group'>
-							<input
-								name='username'
-								type='username'
-								className='form-control' 
-								placeholder='Username'
-								value={this.state.username}
-								onChange={this.handleChange} />
-						</div>
-						<div className='form-group'>
-							<input 
-								name='password'
-								type='password' 
-								className='form-control' 
-								placeholder='Password'
-								value={this.state.password}
-								onChange={this.handleChange} />
-						</div>
-						<div className='form-group'>
-							<input type='submit' className='btn' value='Login' />
-						</div>
-					</form>	
-				}
+				<div className="row justify-content-center">
+			        <div className="col-md-8">
+			            <div className="card">
+							<div className="card-header">Login</div>
+							<div className="card-body">
+								{this.state.error !== '' ?
+									<p className="text-danger">{this.state.error}</p>
+									:
+									null
+								}
+								{this.props.isAuthenticated ?
+									<p className="text-info">You are already logged in.</p>
+									:
+									<form onSubmit={this.handleSubmit}>
+										<div className='form-group'>
+											<input
+												name='username'
+												type='username'
+												className='form-control' 
+												placeholder='Username'
+												value={this.state.username}
+												onChange={this.handleChange} />
+										</div>
+										<div className='form-group'>
+											<input 
+												name='password'
+												type='password' 
+												className='form-control' 
+												placeholder='Password'
+												value={this.state.password}
+												onChange={this.handleChange} />
+										</div>
+
+										<div className="form-group row mb-0">
+                            				<div className="col-md-8">
+												<input type='submit' className='btn btn-primary' value='Login' />
+											</div>
+				                        </div>
+
+									</form>	
+								}
+							</div>
+			            </div>
+		            </div>
+	            </div>
 			</div>
 		);
 	}
