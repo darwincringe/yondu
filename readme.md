@@ -13,10 +13,16 @@ The scope and feature of this project are as follows:
 
 Post deployment intructions:
 
-- cp .env.example .env 
+- cp .env.example .env (setup your environment)
 - composer install
 - php artisan migrate
+- php artisan db:seed
 - php artisan key:generate
 - php artisan jwt:secret
 - npm install
 - npm run watch
+
+Please use the default admin credential from the seeder:
+
+- username: admin
+- password: password
