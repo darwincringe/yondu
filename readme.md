@@ -22,7 +22,12 @@ Post deployment intructions:
 - npm install
 - npm run watch
 
-Please use the default admin credential from the seeder:
+Please use the default credentials from the seeder:
 
+**Admin Credentials**
 - username: admin
+- password: password
+
+**User Credentials**
+- username: user
 - password: password
